@@ -1,0 +1,119 @@
+Choose your hero name: Jeanius123
+Choose your hero job (Warrior, Mage, Ranger): Mage
+Your hero's stat is:
+Name: Jeanius123
+Job: Mage
+HP: 234/234
+Strength: 14
+Dexterity: 14
+Constitution: 11
+Gold: 300
+Do you want to re-roll? (Yes or No): No
+
+Welcome to our shop! Before you begin your adventure, consider buying items!
+(1) Sword        ($  50)
+(2) Shield       ($  75)
+(3) Master Sword ($ 500)
+(0) Leave the shop
+You have $300. What would you like to buy? (1, 2, 3, 0): 1
+Your gold changed by -50.
+
+Welcome to our shop! Before you begin your adventure, consider buying items!
+(1) Sword        ($  50) (SOLD)
+(2) Shield       ($  75)
+(3) Master Sword ($ 500)
+(0) Leave the shop
+You have $250. What would you like to buy? (1, 2, 3, 0): 2
+Your gold changed by -75.
+
+Welcome to our shop! Before you begin your adventure, consider buying items!
+(1) Sword        ($  50) (SOLD)
+(2) Shield       ($  75) (SOLD)
+(3) Master Sword ($ 500)
+(0) Leave the shop
+You have $175. What would you like to buy? (1, 2, 3, 0): 0
+Your adventure begins here!
+
+After a step out of the shop...
+You encountered a Madman!
+(1) Attack with Sword
+(2) Block with Shield
+(0) Run away
+
+You have 234HP and Madman has 50HP.
+What do you do? (1, 2, 0): 1
+You attack! Your opponent attacks!
+Your HP changed by -14.
+Your opponent's HP changed by -18.
+
+You have 220HP and Madman has 32HP.
+What do you do? (1, 2, 0): 1
+You attack! Your opponent attacks!
+Your HP changed by -6.
+Your opponent's HP changed by -12.
+
+You have 214HP and Madman has 20HP.
+What do you do? (1, 2, 0): 1
+You attack! Your opponent attacks!
+Your HP changed by -12.
+Your opponent's HP changed by -11.
+
+You have 202HP and Madman has 9HP.
+What do you do? (1, 2, 0): 1
+You attack! Your opponent attacks!
+Your HP changed by -14.
+Your opponent's HP changed by -16.
+
+You defeated Madman!
+Monster Action Algorithm: Attack 
+
+Nice first fight! Let's move on to the town square.
+
+You are now in the town square!
+Your HP: 188/234. Your Gold: 175.
+(1) Visit the temple
+(2) Go to the castle
+(3) Spend time in the tavern
+(0) Wish in the fountain
+What to do? 1
+
+You are now in the temple!
+Your HP: 188/234. Your Gold: 175.
+(1) Heal for 10 gold
+(0) Go back to the town square
+What to do? 1
+Your gold changed by -10.
+HP replenished.
+
+You are now in the temple!
+Your HP: 234/234. Your Gold: 165.
+(1) Heal for 10 gold
+(0) Go back to the town square
+What to do? 1
+Your gold changed by -10.
+HP replenished.
+
+You are now in the temple!
+Your HP: 234/234. Your Gold: 155.
+(1) Heal for 10 gold
+(0) Go back to the town square
+What to do? 1
+Your gold changed by -10.
+HP replenished.
+
+You are now in the temple!
+Your HP: 234/234. Your Gold: 145.
+(1) Heal for 10 gold
+(0) Go back to the town square
+What to do? 1
+Your gold changed by -10.
+HP replenished.
+
+You are now in the temple!
+Your HP: 234/234. Your Gold: 135.
+(1) Heal for 10 gold
+(0) Go back to the town square
+What to do? 1
+Your gold changed by -10.
+HP replenished.
+
