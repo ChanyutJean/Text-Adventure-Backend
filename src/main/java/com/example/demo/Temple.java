@@ -5,7 +5,6 @@ import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Temple {
 
@@ -15,7 +14,7 @@ public class Temple {
 
         boolean invalidInput = true;
 
-        while(invalidInput) {
+        while (invalidInput) {
 
             int option;
 
@@ -36,7 +35,9 @@ public class Temple {
         output.write(("You are now in the temple!" + "\n").getBytes());
         output.write(("Your HP: " + hero.getHp() + "/" + hero.getMaxHp() + ". Your Gold: " + hero.getGold() + "." + "\n").getBytes());
         output.write(("(1) Heal for 10 gold" + "\n").getBytes());
-        if (hero.getQuest() == 1 && !hero.isInBag("Cloth")) {output.write(("(2) Inspect graveyard" + "\n").getBytes());}
+        if (hero.getQuest() == 1 && !hero.isInBag("Cloth")) {
+            output.write(("(2) Inspect graveyard" + "\n").getBytes());
+        }
         output.write(("(0) Go back to the town square" + "\n").getBytes());
 
         output.write(("What to do? ").getBytes());
@@ -64,7 +65,7 @@ public class Temple {
 
                         boolean defeated = priestFight(hero, r, c, output, reader);
 
-                        if(defeated) {
+                        if (defeated) {
                             output.write(("Hmm! I guess you can go in the grave with this power of yours. Here, take this ghost repellent." + "\n").getBytes());
                             output.write(("Repellent was added to the inventory!" + "\n\n").getBytes());
                             hero.addItemToBag("Repel");

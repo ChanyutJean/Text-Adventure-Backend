@@ -1,8 +1,9 @@
 package com.example.demo;
 
-import java.io.*;
-import java.util.Random;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Tavern {
 
@@ -42,14 +43,10 @@ public class Tavern {
 
         boolean invalidInput = false;
 
-        switch(option) {
+        switch (option) {
 
             case 1:
-                if (hero.getQuest() == 2) {
-                    randomTalk(true, hero, output);
-                } else {
-                    randomTalk(false, hero, output);
-                }
+                randomTalk(hero.getQuest() == 2, hero, output);
                 break;
             case 0:
                 hero.setLocation("Town");
@@ -95,13 +92,7 @@ public class Tavern {
                         hero.setTalk();
                         break;
                     case 6:
-                        output.write(("\n").getBytes());
-                        hero.setTalk();
-                        break;
                     case 7:
-                        output.write(("\n").getBytes());
-                        hero.setTalk();
-                        break;
                     case 8:
                         output.write(("\n").getBytes());
                         hero.setTalk();

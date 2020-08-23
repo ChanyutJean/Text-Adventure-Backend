@@ -2,7 +2,7 @@ package com.example.demo;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Random;
 
 public class Main {
 
@@ -30,7 +30,9 @@ public class Main {
         firstFight(hero, r, c, output, reader);
 
         try {
-            while (hero.getGameIsRunning()) {runGame(hero, r, c, output, reader);}
+            while (hero.getGameIsRunning()) {
+                runGame(hero, r, c, output, reader);
+            }
         } catch (EOFException e) {
             return outputFile;
         }
@@ -103,7 +105,6 @@ public class Main {
     }
 
 
-
     public static void introduction(Hero hero, Random r, FileOutputStream output, BufferedReader reader) throws IOException {
 
         if (!reader.ready()) {
@@ -143,7 +144,7 @@ public class Main {
 
         hero.setGold(Hero.INITIAL_GOLD);
 
-        boolean[] shopStatus = new boolean[] {true, false, false, false}; //shopLoop, swordSold, shieldSold, masterSold
+        boolean[] shopStatus = new boolean[]{true, false, false, false}; //shopLoop, swordSold, shieldSold, masterSold
 
         while (shopStatus[0]) {
 
@@ -175,7 +176,7 @@ public class Main {
 
         output.write(("After a step out of the shop..." + "\n").getBytes());
 
-        Monster Madman = new Monster(50, "Madman", new boolean[] {true});
+        Monster Madman = new Monster(50, "Madman", new boolean[]{true});
 
         boolean madManDefeated = false;
 
@@ -185,7 +186,7 @@ public class Main {
 
             madManDefeated = (Madman.getHp() <= 0);
 
-            if(madManDefeated) {
+            if (madManDefeated) {
                 output.write(("Nice first fight! Let's move on to the town square." + "\n\n").getBytes());
             } else {
                 output.write(("You lost to your opponent! Let's try this one more time." + "\n\n").getBytes());
@@ -197,7 +198,6 @@ public class Main {
         hero.setLocation("Town");
 
     }
-
 
 
     public static int getInt(FileOutputStream output, BufferedReader reader) throws IOException {

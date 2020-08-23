@@ -38,7 +38,9 @@ public class Grave {
                         return;
                     }
 
-                    if (!retry) {break;}
+                    if (!retry) {
+                        break;
+                    }
                 } else {
                     hero.setHp(1);
                     output.write(("You are out of HP!" + "\n").getBytes());
@@ -60,23 +62,41 @@ public class Grave {
         boolean turn;
 
         turn = Main.getBoolean("You came across a crossroad. Do you turn to your right?", output, reader);
-        if (turn) {return false;}
+        if (turn) {
+            return false;
+        }
         turn = Main.getBoolean("Next, do you turn to your left?", output, reader);
-        if (turn) {return false;}
+        if (turn) {
+            return false;
+        }
         turn = Main.getBoolean("Next, do you go straight?", output, reader);
-        if (!turn) {return false;}
+        if (!turn) {
+            return false;
+        }
         turn = Main.getBoolean("You came across some stairs, going up and down. Do you climb up the stairs?", output, reader);
-        if (turn) {return false;}
+        if (turn) {
+            return false;
+        }
         turn = Main.getBoolean("You become fatigued. Forge on?", output, reader);
-        if (!turn) {return false;}
+        if (!turn) {
+            return false;
+        }
         turn = Main.getBoolean("You've come far. Do you turn around and detour?", output, reader);
-        if (turn) {return false;}
+        if (turn) {
+            return false;
+        }
         turn = Main.getBoolean("After a long walk, you heard some mechanical noise behind you. Turn back and detour?", output, reader);
-        if (!turn) {return false;}
+        if (!turn) {
+            return false;
+        }
         turn = Main.getBoolean("You found a tombstone, do you inspect it?", output, reader);
-        if (!turn) {return false;}
+        if (!turn) {
+            return false;
+        }
         turn = Main.getBoolean("Inside lies an empty coffin, do you continue your inspection?", output, reader);
-        if (!turn) {return false;}
+        if (!turn) {
+            return false;
+        }
         turn = Main.getBoolean("You found a torn piece of cloth, do you take it?", output, reader);
 
         return turn;

@@ -14,7 +14,7 @@ public class Castle {
 
         boolean invalidInput = true;
 
-        while(invalidInput) {
+        while (invalidInput) {
 
             int option;
 
@@ -35,9 +35,15 @@ public class Castle {
         output.write(("You are now in the castle!" + "\n").getBytes());
         output.write(("Your HP: " + hero.getHp() + "/" + hero.getMaxHp() + ". Your Gold: " + hero.getGold() + "." + "\n").getBytes());
         output.write(("(1) Work for the king" + "\n").getBytes());
-        if (hero.getQuest() == 0) {output.write(("(2) Talk to the guards" + "\n").getBytes());}
-        if (hero.getQuest() == 1 && hero.isInBag("Cloth")) {output.write(("(2) Tell the guards about the cloth" + "\n").getBytes());}
-        if (hero.getQuest() == 2 && hero.isInBag("Letter")) {output.write(("(2) Give letter to the guards" + "\n").getBytes());}
+        if (hero.getQuest() == 0) {
+            output.write(("(2) Talk to the guards" + "\n").getBytes());
+        }
+        if (hero.getQuest() == 1 && hero.isInBag("Cloth")) {
+            output.write(("(2) Tell the guards about the cloth" + "\n").getBytes());
+        }
+        if (hero.getQuest() == 2 && hero.isInBag("Letter")) {
+            output.write(("(2) Give letter to the guards" + "\n").getBytes());
+        }
         output.write(("(0) Go back to the town square" + "\n").getBytes());
 
         output.write(("What to do? ").getBytes());
@@ -148,7 +154,7 @@ public class Castle {
 
     public static void guardFight(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
 
-        Monster Guard = new Monster(200, "Guard", new boolean[] {true, false});
+        Monster Guard = new Monster(200, "Guard", new boolean[]{true, false});
 
         c.fight(hero, Guard, r, output, reader);
 

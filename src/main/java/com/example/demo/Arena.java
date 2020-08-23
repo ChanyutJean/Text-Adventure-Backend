@@ -9,7 +9,7 @@ public class Arena {
 
     public static void atArena(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
 
-        if(hero.isInBag("Master")) {
+        if (hero.isInBag("Master")) {
 
             output.write(("You stepped into the arena..." + "\n").getBytes());
 
@@ -42,7 +42,7 @@ public class Arena {
                 case 3:
 
                     output.write(("...Congratulations! You've defeated the boss of the arena!" + "\n").getBytes());
-                    output.write(("-----END-----"  + "\n").getBytes());
+                    output.write(("-----END-----" + "\n").getBytes());
                     hero.setGameIsRunning();
 
             }

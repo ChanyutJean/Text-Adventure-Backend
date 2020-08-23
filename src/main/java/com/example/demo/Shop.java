@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Shop {
 
@@ -39,15 +38,21 @@ public class Shop {
         output.write(("Welcome to our shop! Before you begin your adventure, consider buying items!" + "\n").getBytes());
 
         output.write(("(1) Sword        ($  50)").getBytes());
-        if (swordSold) {output.write((" (SOLD)").getBytes());}
+        if (swordSold) {
+            output.write((" (SOLD)").getBytes());
+        }
         output.write(("\n").getBytes());
 
         output.write(("(2) Shield       ($  75)").getBytes());
-        if (shieldSold) {output.write((" (SOLD)").getBytes());}
+        if (shieldSold) {
+            output.write((" (SOLD)").getBytes());
+        }
         output.write(("\n").getBytes());
 
         output.write(("(3) Master Sword ($ 500)").getBytes());
-        if (masterSold) {output.write((" (SOLD)").getBytes());}
+        if (masterSold) {
+            output.write((" (SOLD)").getBytes());
+        }
         output.write(("\n").getBytes());
 
         output.write(("(0) Leave the shop" + "\n").getBytes());
@@ -101,7 +106,7 @@ public class Shop {
                         output.write(("Thank you for your purchase!" + "\n\n").getBytes());
                         hero.addItemToBag("Master");
                         hero.changeGold(-500, output);
-                        return new boolean[] {false, true, true, true}; //exits secondShopLoop instantly
+                        return new boolean[]{false, true, true, true}; //exits secondShopLoop instantly
 
                     } else {
                         output.write(("Already sold!" + "\n").getBytes());
@@ -127,13 +132,8 @@ public class Shop {
                 output.write(("Enter a valid number!" + "\n").getBytes());
         }
 
-        return new boolean[] {shopLoop, swordSold, shieldSold, masterSold};
+        return new boolean[]{shopLoop, swordSold, shieldSold, masterSold};
     }
-
-
-
-
-
 
 
 }

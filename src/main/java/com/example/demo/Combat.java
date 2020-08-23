@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.Random;
 
 public class Combat {
@@ -13,60 +12,6 @@ public class Combat {
     private boolean playerLoseTurn = false;
     private boolean monsterLoseTurn = false;
     private byte consecutiveShield = 0;
-
-    public void fight(Hero hero, Monster mon, Random r, FileOutputStream output, BufferedReader reader) throws IOException {
-
-        playerRuns = false;
-        playerLoseTurn = false;
-        monsterLoseTurn = false;
-        consecutiveShield = 0;
-
-        printInitCombat(mon, output);
-
-        while (hero.getHp() > 0 && mon.getHp() > 0 && !playerRuns) {
-
-            for (byte i = 0; i < mon.getAlgorithm().length && hero.getHp() > 0 && mon.getHp() > 0 && !playerRuns; i++) {
-
-                if (!playerLoseTurn) {
-
-                    printCombat(hero, mon, output);
-
-                    int option;
-
-                    try {
-                        option = Main.getInt(output, reader);
-                    } catch (EOFException e) {
-                        return;
-                    }
-
-                    playerAct(option, r, i, hero, mon, output);
-
-                } else {
-
-                    playerIdle(i ,mon, hero, r, output);
-
-                    playerLoseTurn = false;
-                }
-
-                output.write(("\n").getBytes());
-            }
-        }
-
-        if (mon.getHp() <=0) {
-
-            mon.printAlgorithm(output);
-
-        } else {
-
-            mon.resetHp();
-
-            if (!playerRuns && !mon.getName().equals("Madman")) {
-                playerLost(hero, output); //don't go to temple if opponent is madman
-            }
-            hero.setRestart(); //no more arena fight
-        }
-
-    }
 
     public static void printInitCombat(Monster mon, FileOutputStream output) throws IOException {
 
@@ -84,58 +29,6 @@ public class Combat {
 
     }
 
-    public void playerAct(int option, Random r, byte i, Hero hero, Monster mon, FileOutputStream output) throws IOException {
-
-        switch (option) {
-
-            case 1:
-
-                consecutiveShield = 0;
-
-                playerLoseTurn = playerAttack(monsterLoseTurn, i, hero, mon, r, output);
-
-                monsterLoseTurn = false;
-
-                break;
-
-            case 2:
-
-                if (mon.getName() == "Fairy") {
-
-                    output.write(("Fairy heals itself while you defend!" + "\n").getBytes());
-                    mon.changeHp(3, output);
-
-                }
-
-                consecutiveShield++;
-
-                boolean playerDefends = determineDefend(consecutiveShield, r, hero, output);
-
-                if (playerDefends) {
-                
-                    playerLoseTurn = false;
-                    monsterLoseTurn = playerDefend(monsterLoseTurn, i, mon, output);
-
-                }
-
-                break;
-
-            case 0:
-
-                playerRuns = playerRun(r, hero, mon, i, output);
-
-                break;
-
-            default:
-
-                output.write(("You are at a loss of what to do!" + "\n").getBytes());
-                hero.changeHp(-5, output);
-        }
-
-    } //items
-
-
-
     public static boolean playerAttack(boolean monsterLoseTurn, byte i, Hero hero, Monster mon, Random r, FileOutputStream output) throws IOException {
 
         boolean playerLoseTurn = false;
@@ -144,7 +37,7 @@ public class Combat {
 
             boolean monsterStance = mon.getAlgorithm()[i];
 
-            if (mon.getName() == "Demon" && mon.getHp() < 200) {
+            if (mon.getName().equals("Demon") && mon.getHp() < 200) {
 
                 monsterStance = !monsterStance;
 
@@ -173,7 +66,7 @@ public class Combat {
 
             boolean monsterStance = mon.getAlgorithm()[i];
 
-            if (mon.getName() == "Demon" && mon.getHp() < 200) {
+            if (mon.getName().equals("Demon") && mon.getHp() < 200) {
 
                 monsterStance = !monsterStance;
 
@@ -183,7 +76,7 @@ public class Combat {
                 output.write(("You shield! Your opponent attacks! Your opponent flinched!" + "\n").getBytes());
                 monsterLoseTurn = true;
             } else {
-                output.write(("You shield! Your opponent shields! Nothing happened!"+ "\n").getBytes());
+                output.write(("You shield! Your opponent shields! Nothing happened!" + "\n").getBytes());
             }
 
         } else {
@@ -259,5 +152,109 @@ public class Combat {
         output.write(("Along the way back, you encountered a robber and lost all your gold along the way." + "\n").getBytes());
 
     }
+
+    public void fight(Hero hero, Monster mon, Random r, FileOutputStream output, BufferedReader reader) throws IOException {
+
+        playerRuns = false;
+        playerLoseTurn = false;
+        monsterLoseTurn = false;
+        consecutiveShield = 0;
+
+        printInitCombat(mon, output);
+
+        while (hero.getHp() > 0 && mon.getHp() > 0 && !playerRuns) {
+
+            for (byte i = 0; i < mon.getAlgorithm().length && hero.getHp() > 0 && mon.getHp() > 0 && !playerRuns; i++) {
+
+                if (!playerLoseTurn) {
+
+                    printCombat(hero, mon, output);
+
+                    int option;
+
+                    try {
+                        option = Main.getInt(output, reader);
+                    } catch (EOFException e) {
+                        return;
+                    }
+
+                    playerAct(option, r, i, hero, mon, output);
+
+                } else {
+
+                    playerIdle(i, mon, hero, r, output);
+
+                    playerLoseTurn = false;
+                }
+
+                output.write(("\n").getBytes());
+            }
+        }
+
+        if (mon.getHp() <= 0) {
+
+            mon.printAlgorithm(output);
+
+        } else {
+
+            mon.resetHp();
+
+            if (!playerRuns && !mon.getName().equals("Madman")) {
+                playerLost(hero, output); //don't go to temple if opponent is madman
+            }
+            hero.setRestart(); //no more arena fight
+        }
+
+    }
+
+    public void playerAct(int option, Random r, byte i, Hero hero, Monster mon, FileOutputStream output) throws IOException {
+
+        switch (option) {
+
+            case 1:
+
+                consecutiveShield = 0;
+
+                playerLoseTurn = playerAttack(monsterLoseTurn, i, hero, mon, r, output);
+
+                monsterLoseTurn = false;
+
+                break;
+
+            case 2:
+
+                if (mon.getName().equals("Fairy")) {
+
+                    output.write(("Fairy heals itself while you defend!" + "\n").getBytes());
+                    mon.changeHp(3, output);
+
+                }
+
+                consecutiveShield++;
+
+                boolean playerDefends = determineDefend(consecutiveShield, r, hero, output);
+
+                if (playerDefends) {
+
+                    playerLoseTurn = false;
+                    monsterLoseTurn = playerDefend(monsterLoseTurn, i, mon, output);
+
+                }
+
+                break;
+
+            case 0:
+
+                playerRuns = playerRun(r, hero, mon, i, output);
+
+                break;
+
+            default:
+
+                output.write(("You are at a loss of what to do!" + "\n").getBytes());
+                hero.changeHp(-5, output);
+        }
+
+    } //items
 
 }

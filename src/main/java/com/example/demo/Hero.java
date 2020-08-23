@@ -30,50 +30,142 @@ public class Hero {
     private boolean fountain = false;
     private boolean restart = false;
     private boolean gameIsRunning = true;
-    private boolean[] lostTo = new boolean[] {false, false, false}; //guard, priest, tycoon
-    private String[] bag = new String[BAG_LENGTH];
-    
-    public void setMaxHp(int value) {maxHp = value;}
-    public void setHp(int value) {hp = value;}
-    public void setStr(int value) {str = value;}
-    public void setDex(int value) {dex = value;}
-    public void setCon(int value) {con = value;}
-    public void setGold(int value) {gold = value;}
-    public void setLocation(String value) {location = value;}
-    public void setQuest(int value) {quest = value;}
-    public void setTalk() {if (talk < 10) {talk++;} else {talk = 1;}}
-    public void setArena() {arena++;}
-    public void setFountain() {fountain = true;}
-    public void setRestart() {restart = true;}
-    public void setGameIsRunning() {gameIsRunning = false;}
-    public void setLostTo(int i) {lostTo[i] = true;}
+    private final boolean[] lostTo = new boolean[]{false, false, false}; //guard, priest, tycoon
+    private final String[] bag = new String[BAG_LENGTH];
+
+    public void setTalk() {
+        if (talk < 10) {
+            talk++;
+        } else {
+            talk = 1;
+        }
+    }
+
+    public void setArena() {
+        arena++;
+    }
+
+    public void setFountain() {
+        fountain = true;
+    }
+
+    public void setRestart() {
+        restart = true;
+    }
+
+    public void setGameIsRunning() {
+        gameIsRunning = false;
+    }
+
+    public void setLostTo(int i) {
+        lostTo[i] = true;
+    }
 
     public void changeHp(int value, FileOutputStream output) throws IOException {
         hp = hp + value;
         output.write(("Your HP changed by " + value + "." + "\n").getBytes());
     }
 
-    public void changeGold(int value, FileOutputStream output) throws IOException{
+    public void changeGold(int value, FileOutputStream output) throws IOException {
         gold += value;
         output.write(("Your gold changed by " + value + "." + "\n").getBytes());
     }
 
-    public int getMaxHp() {return maxHp;}
-    public int getHp() {return hp;}
-    public String getName() {return name;}
-    public String getJob() {return job;}
-    public int getStr() {return str;}
-    public int getDex() {return dex;}
-    public int getCon() {return con;}
-    public int getGold() {return gold;}
-    public String getLocation() {return location;}
-    public int getQuest() {return quest;}
-    public int getTalk() {return talk;}
-    public int getArena() {return arena;}
-    public boolean getFountain() {return fountain;}
-    public boolean getRestart() {return restart;}
-    public boolean getGameIsRunning() {return gameIsRunning;}
-    public boolean getLostTo(int i) {return lostTo[i];}
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setMaxHp(int value) {
+        maxHp = value;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int value) {
+        hp = value;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public int getStr() {
+        return str;
+    }
+
+    public void setStr(int value) {
+        str = value;
+    }
+
+    public int getDex() {
+        return dex;
+    }
+
+    public void setDex(int value) {
+        dex = value;
+    }
+
+    public int getCon() {
+        return con;
+    }
+
+    public void setCon(int value) {
+        con = value;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int value) {
+        gold = value;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String value) {
+        location = value;
+    }
+
+    public int getQuest() {
+        return quest;
+    }
+
+    public void setQuest(int value) {
+        quest = value;
+    }
+
+    public int getTalk() {
+        return talk;
+    }
+
+    public int getArena() {
+        return arena;
+    }
+
+    public boolean getFountain() {
+        return fountain;
+    }
+
+    public boolean getRestart() {
+        return restart;
+    }
+
+    public boolean getGameIsRunning() {
+        return gameIsRunning;
+    }
+
+    public boolean getLostTo(int i) {
+        return lostTo[i];
+    }
 
     public void addItemToBag(String value) {
         for (int i = 0; i < BAG_LENGTH; i++) {
@@ -93,7 +185,7 @@ public class Hero {
         return false;
     }
 
-    public void printBag(FileOutputStream output) throws IOException{
+    public void printBag(FileOutputStream output) throws IOException {
         if (bag[0] == null) {
             output.write(("None").getBytes());
         }

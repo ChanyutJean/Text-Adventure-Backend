@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Town {
 
@@ -40,9 +39,15 @@ public class Town {
         output.write(("(2) Go to the castle" + "\n").getBytes());
         output.write(("(3) Spend time in the tavern" + "\n").getBytes());
 
-        if (hero.getQuest() == 2 && !hero.isInBag("Letter")) {output.write(("(4) Look around the manor" + "\n").getBytes());}
-        if (hero.getQuest() == 3) {output.write(("(4) Fight in the arena" + "\n").getBytes());}
-        if (hero.getQuest() == 3 && !hero.isInBag("Master")) {output.write(("(5) Buy something in the shop" + "\n").getBytes());}
+        if (hero.getQuest() == 2 && !hero.isInBag("Letter")) {
+            output.write(("(4) Look around the manor" + "\n").getBytes());
+        }
+        if (hero.getQuest() == 3) {
+            output.write(("(4) Fight in the arena" + "\n").getBytes());
+        }
+        if (hero.getQuest() == 3 && !hero.isInBag("Master")) {
+            output.write(("(5) Buy something in the shop" + "\n").getBytes());
+        }
 
         if (!hero.getFountain()) {
             output.write(("(0) Wish in the fountain" + "\n").getBytes());
