@@ -1,7 +1,6 @@
-package com.example.demo;
+package com.example.demo.game;
 
 import java.io.BufferedReader;
-import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -17,11 +16,7 @@ public class Shop {
 
             int itemToBuy;
 
-            try {
-                itemToBuy = Main.getInt(output, reader);
-            } catch (EOFException e) {
-                return;
-            }
+            itemToBuy = Main.getInt(output, reader);
 
             boolean[] shopLoopArray = Shop.buyItem(true, true, false, itemToBuy, hero, output);
 

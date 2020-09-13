@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.game;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -23,15 +23,15 @@ public class Main {
 
         Combat c = new Combat();
 
-        introduction(hero, r, output, reader);
+        boolean shoppingReady = introduction(hero, r, output, reader);
 
-        shopping(hero, output, reader);
+        boolean fightReady = shopping(hero, output, reader, shoppingReady);
 
-        firstFight(hero, r, c, output, reader);
+        boolean ready = firstFight(hero, r, c, output, reader, fightReady);
 
         try {
             while (hero.getGameIsRunning()) {
-                runGame(hero, r, c, output, reader);
+                runGame(hero, r, c, output, reader, ready);
             }
         } catch (EOFException e) {
             return outputFile;
@@ -64,9 +64,9 @@ public class Main {
     //tycoon 500HP defend-defend-attack
 
 
-    public static void runGame(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static void runGame(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader, boolean ready) throws IOException {
 
-        if (!reader.ready()) {
+        if (!ready) {
             throw new EOFException();
         }
 
@@ -105,16 +105,16 @@ public class Main {
     }
 
 
-    public static void introduction(Hero hero, Random r, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static boolean introduction(Hero hero, Random r, FileOutputStream output, BufferedReader reader) throws IOException {
 
         if (!reader.ready()) {
-            return;
+            return false;
         }
 
         try {
             hero.setHeroStat(output, reader);
         } catch (EOFException e) {
-            return;
+            return false;
         }
 
         boolean heroIsCreated;
@@ -128,18 +128,20 @@ public class Main {
             try {
                 heroIsCreated = !getBoolean("Do you want to re-roll?", output, reader);
             } catch (EOFException e) {
-                return;
+                return false;
             }
 
         } while (!heroIsCreated);
 
         output.write(("\n").getBytes());
+
+        return true;
     }
 
-    public static void shopping(Hero hero, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static boolean shopping(Hero hero, FileOutputStream output, BufferedReader reader, boolean ready) throws IOException {
 
-        if (!reader.ready()) {
-            return;
+        if (!ready) {
+            return false;
         }
 
         hero.setGold(Hero.INITIAL_GOLD);
@@ -155,7 +157,7 @@ public class Main {
             try {
                 itemToBuy = getInt(output, reader);
             } catch (EOFException e) {
-                return;
+                return false;
             }
 
             boolean[] soldStatus = Shop.buyItem(shopStatus[1], shopStatus[2], shopStatus[3], itemToBuy, hero, output);
@@ -166,12 +168,14 @@ public class Main {
 
         }
 
+        return true;
+
     }
 
-    public static void firstFight(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static boolean firstFight(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader, boolean ready) throws IOException {
 
-        if (!reader.ready()) {
-            return;
+        if (!ready) {
+            return false;
         }
 
         output.write(("After a step out of the shop..." + "\n").getBytes());
@@ -182,7 +186,11 @@ public class Main {
 
         while (!madManDefeated) {
 
-            c.fight(hero, Madman, r, output, reader);
+            try {
+                c.fight(hero, Madman, r, output, reader);
+            } catch (EOFException e) {
+                return false;
+            }
 
             madManDefeated = (Madman.getHp() <= 0);
 
@@ -196,6 +204,8 @@ public class Main {
         }
 
         hero.setLocation("Town");
+
+        return true;
 
     }
 

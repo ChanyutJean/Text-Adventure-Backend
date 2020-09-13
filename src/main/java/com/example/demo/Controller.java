@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.game.Main;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
@@ -9,18 +10,38 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/")
 public class Controller {
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/")
-    public String interact(@RequestBody String input) throws IOException {
+    @PostMapping("/")
+    public String interact(@RequestBody String rawInput) throws IOException {
+        String input = decode(rawInput);
 
-        InputStream stream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+        byte[] inputBytes = input.getBytes(StandardCharsets.UTF_8);
+
+        if (inputBytes.length > 9999) {
+            return "You linger in the world of games for too long and got kicked out.";
+        }
+
+        InputStream stream = new ByteArrayInputStream(inputBytes);
         File outputFile = Main.start(stream);
 
         return new String(Files.readAllBytes(outputFile.toPath()), StandardCharsets.UTF_8);
+    }
+
+    public static String decode(String value) {
+        try {
+            String valueWithEquals = URLDecoder.decode(value, StandardCharsets.UTF_8.toString());
+            return valueWithEquals.substring(0, valueWithEquals.length() - 1);
+        } catch (UnsupportedEncodingException ex) {
+            throw new RuntimeException(ex.getCause());
+        }
     }
 
 }

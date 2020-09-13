@@ -1,7 +1,6 @@
-package com.example.demo;
+package com.example.demo.game;
 
 import java.io.BufferedReader;
-import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -17,11 +16,7 @@ public class Town {
 
             int option;
 
-            try {
-                option = Main.getInt(output, reader);
-            } catch (EOFException e) {
-                return;
-            }
+            option = Main.getInt(output, reader);
 
             invalidInput = setTown(option, hero, output, reader);
 

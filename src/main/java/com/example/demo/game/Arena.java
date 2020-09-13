@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.game;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;

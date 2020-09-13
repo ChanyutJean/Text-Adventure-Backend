@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.game;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

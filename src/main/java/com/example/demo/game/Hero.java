@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.game;
 
 import java.io.BufferedReader;
 import java.io.EOFException;
@@ -198,14 +198,27 @@ public class Hero {
 
     public void setHeroStat(FileOutputStream output, BufferedReader reader) throws IOException {
 
-        output.write(("Choose your hero name: ").getBytes());
+        String heroName = "";
 
-        if (reader.ready()) {
-            name = reader.readLine();
-            output.write((name + "\n").getBytes());
-        } else {
-            return;
+        while ((heroName.equals("") || heroName.equals("No inputs yet!"))) {
+
+            output.write(("Choose your hero name: ").getBytes());
+
+            if (reader.ready()) {
+                heroName = reader.readLine();
+                output.write((heroName + "\n").getBytes());
+
+                if (heroName.equals("No inputs yet!")) {
+                    output.write(("Nice try." + "\n").getBytes());
+                }
+
+            } else {
+                throw new EOFException();
+            }
+
         }
+
+        name = heroName;
 
         String heroJob = "";
 

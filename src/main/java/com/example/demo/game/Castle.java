@@ -1,7 +1,6 @@
-package com.example.demo;
+package com.example.demo.game;
 
 import java.io.BufferedReader;
-import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
@@ -18,11 +17,7 @@ public class Castle {
 
             int option;
 
-            try {
-                option = Main.getInt(output, reader);
-            } catch (EOFException e) {
-                return;
-            }
+            option = Main.getInt(output, reader);
 
             invalidInput = setCastle(option, hero, r, c, output, reader);
 
@@ -103,11 +98,7 @@ public class Castle {
 
             for (int i = 0; i < 3; i++) {
 
-                try {
-                    accept = Main.getBoolean("Accept?", output, reader);
-                } catch (EOFException e) {
-                    return;
-                }
+                accept = Main.getBoolean("Accept?", output, reader);
 
                 if (accept) {
 
@@ -128,11 +119,7 @@ public class Castle {
                             output.write(("This is an order." + "\n").getBytes());
 
                             while (!accept) {
-                                try {
-                                    accept = Main.getBoolean("Accept?", output, reader);
-                                } catch (EOFException e) {
-                                    return;
-                                }
+                                accept = Main.getBoolean("Accept?", output, reader);
                             }
 
                             output.write(("Nice! Now to make sure that you are capable of self-defense..." + "\n" + "\n").getBytes());

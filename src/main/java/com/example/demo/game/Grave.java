@@ -1,7 +1,6 @@
-package com.example.demo;
+package com.example.demo.game;
 
 import java.io.BufferedReader;
-import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -14,11 +13,8 @@ public class Grave {
         while (true) {
 
             boolean graveResult;
-            try {
-                graveResult = graveTurn(output, reader);
-            } catch (EOFException e) {
-                return;
-            }
+
+            graveResult = graveTurn(output, reader);
 
             if (graveResult) {
                 output.write(("You got a torn cloth. Torn cloth was put into inventory, show it to the guards!" + "\n").getBytes());
@@ -32,11 +28,7 @@ public class Grave {
 
                     boolean retry;
 
-                    try {
-                        retry = Main.getBoolean("Retry?", output, reader);
-                    } catch (EOFException e) {
-                        return;
-                    }
+                    retry = Main.getBoolean("Retry?", output, reader);
 
                     if (!retry) {
                         break;

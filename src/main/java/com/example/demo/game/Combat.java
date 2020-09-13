@@ -1,7 +1,6 @@
-package com.example.demo;
+package com.example.demo.game;
 
 import java.io.BufferedReader;
-import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
@@ -172,11 +171,7 @@ public class Combat {
 
                     int option;
 
-                    try {
-                        option = Main.getInt(output, reader);
-                    } catch (EOFException e) {
-                        return;
-                    }
+                    option = Main.getInt(output, reader);
 
                     playerAct(option, r, i, hero, mon, output);
 
