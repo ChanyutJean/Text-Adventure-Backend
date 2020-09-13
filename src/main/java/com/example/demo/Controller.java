@@ -19,6 +19,11 @@ import java.nio.charset.StandardCharsets;
 @RequestMapping("/")
 public class Controller {
 
+    @GetMapping("/")
+    public String home() {
+        return "Welcome! Use POST request to communicate.";
+    }
+
     @PostMapping("/")
     public String interact(@RequestBody String rawInput) throws IOException {
         String input = decode(rawInput);
