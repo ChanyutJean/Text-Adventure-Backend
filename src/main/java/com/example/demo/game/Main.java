@@ -217,9 +217,10 @@ public class Main {
 
         while (!inputIsInt) {
 
-            if (reader.ready()) {
+            String line;
+            if ((line = reader.readLine()) != null) {
                 try {
-                    option = Integer.parseInt(reader.readLine());
+                    option = Integer.parseInt(line);
                     output.write((option + "\n").getBytes());
                     inputIsInt = true;
                 } catch (NumberFormatException e) {
@@ -242,8 +243,9 @@ public class Main {
 
             output.write((prompt + " (Yes or No): ").getBytes());
 
-            if (reader.ready()) {
-                accept = reader.readLine();
+            String line;
+            if ((line = reader.readLine()) != null) {
+                accept = line;
                 output.write((accept + "\n").getBytes());
             } else {
                 throw new EOFException();

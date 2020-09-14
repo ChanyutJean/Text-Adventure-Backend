@@ -14,9 +14,7 @@ public class Tavern {
 
         while (invalidInput) {
 
-            int option;
-
-            option = Main.getInt(output, reader);
+            int option = Main.getInt(output, reader);
 
             invalidInput = setTavern(option, hero, output);
 

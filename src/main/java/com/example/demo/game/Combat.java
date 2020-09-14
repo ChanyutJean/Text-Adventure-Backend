@@ -169,9 +169,7 @@ public class Combat {
 
                     printCombat(hero, mon, output);
 
-                    int option;
-
-                    option = Main.getInt(output, reader);
+                    int option = Main.getInt(output, reader);
 
                     playerAct(option, r, i, hero, mon, output);
 

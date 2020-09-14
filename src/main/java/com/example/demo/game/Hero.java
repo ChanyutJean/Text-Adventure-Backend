@@ -200,8 +200,9 @@ public class Hero {
 
         output.write(("Choose your hero name: ").getBytes());
 
-        if (reader.ready()) {
-            name = reader.readLine();
+        String line;
+        if ((line = reader.readLine()) != null) {
+            name = line;
             output.write((name + "\n").getBytes());
         } else {
             throw new EOFException();
@@ -213,8 +214,8 @@ public class Hero {
 
             output.write(("Choose your hero job (Warrior, Mage, Ranger): ").getBytes());
 
-            if (reader.ready()) {
-                heroJob = reader.readLine();
+            if ((line = reader.readLine()) != null) {
+                heroJob = line;
                 output.write((heroJob + "\n").getBytes());
             } else {
                 throw new EOFException();

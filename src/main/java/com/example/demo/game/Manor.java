@@ -17,8 +17,9 @@ public class Manor {
 
             String password;
 
-            if (reader.ready()) {
-                password = reader.readLine();
+            String line;
+            if ((line = reader.readLine()) != null) {
+                password = line;
                 output.write((password + "\n").getBytes());
             } else {
                 return;

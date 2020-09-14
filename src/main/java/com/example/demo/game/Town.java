@@ -1,6 +1,7 @@
 package com.example.demo.game;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -14,9 +15,7 @@ public class Town {
 
         while (invalidInput) {
 
-            int option;
-
-            option = Main.getInt(output, reader);
+            int option = Main.getInt(output, reader);
 
             invalidInput = setTown(option, hero, output, reader);
 
@@ -112,11 +111,12 @@ public class Town {
         while (!(wish.equals("HP") || wish.equals("Gold") || wish.equals("Str") || wish.equals("Dex") || wish.equals("Con"))) {
             output.write(("What do you wish for? (HP, Gold, Str, Dex, Con): ").getBytes());
 
-            if (reader.ready()) {
-                wish = reader.readLine();
+            String line;
+            if ((line = reader.readLine()) != null) {
+                wish = line;
                 output.write((wish + "\n").getBytes());
             } else {
-                return;
+                throw new EOFException();
             }
         }
 

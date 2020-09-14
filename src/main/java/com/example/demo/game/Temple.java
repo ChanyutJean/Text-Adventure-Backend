@@ -15,9 +15,7 @@ public class Temple {
 
         while (invalidInput) {
 
-            int option;
-
-            option = Main.getInt(output, reader);
+            int option = Main.getInt(output, reader);
 
             invalidInput = setTemple(option, hero, r, c, output, reader);
 

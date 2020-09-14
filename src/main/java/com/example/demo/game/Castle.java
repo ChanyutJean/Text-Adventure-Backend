@@ -15,9 +15,7 @@ public class Castle {
 
         while (invalidInput) {
 
-            int option;
-
-            option = Main.getInt(output, reader);
+            int option = Main.getInt(output, reader);
 
             invalidInput = setCastle(option, hero, r, c, output, reader);
 
