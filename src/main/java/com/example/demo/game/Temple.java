@@ -3,11 +3,10 @@ package com.example.demo.game;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 public class Temple {
 
-    public static void atTemple(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
+    public static void atTemple(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
 
         printTemple(hero, output);
 
@@ -37,7 +36,7 @@ public class Temple {
 
     }
 
-    public static boolean setTemple(int option, Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
+    public static boolean setTemple(int option, Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
 
         boolean invalidInput = false;
 
@@ -87,7 +86,7 @@ public class Temple {
 
     }
 
-    public static boolean priestFight(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
+    public static boolean priestFight(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
 
         if (!hero.getLostTo(1)) {
             output.write(("\n" + "Wait! You shouldn't go there, it's dangerous!" + "\n").getBytes());

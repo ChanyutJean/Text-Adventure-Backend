@@ -3,11 +3,10 @@ package com.example.demo.game;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 public class Castle {
 
-    public static void atCastle(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
+    public static void atCastle(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
 
         printCastle(hero, output);
 
@@ -42,7 +41,7 @@ public class Castle {
         output.write(("What to do? ").getBytes());
     }
 
-    public static boolean setCastle(int option, Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
+    public static boolean setCastle(int option, Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
 
         output.write(("\n").getBytes());
 
@@ -85,7 +84,7 @@ public class Castle {
 
     }
 
-    public static void guardTalk(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
+    public static void guardTalk(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
 
         if (!hero.getLostTo(0)) {
 
@@ -137,7 +136,7 @@ public class Castle {
         }
     }
 
-    public static void guardFight(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
+    public static void guardFight(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
 
         Monster Guard = new Monster(200, "Guard", new boolean[]{true, false});
 

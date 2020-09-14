@@ -226,7 +226,7 @@ public class Hero {
         job = heroJob;
     }
 
-    public void assignStat() throws NoSuchAlgorithmException {
+    public void assignStat() {
 
         str = (Main.hash(Hero.MAX_SKILL - Hero.MIN_SKILL + 1) + Hero.MIN_SKILL);
         dex = (Main.hash(Hero.MAX_SKILL - Hero.MIN_SKILL + 1) + Hero.MIN_SKILL);

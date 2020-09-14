@@ -3,11 +3,10 @@ package com.example.demo.game;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 public class Arena {
 
-    public static void atArena(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
+    public static void atArena(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
 
         if (hero.isInBag("Master")) {
 
@@ -55,7 +54,7 @@ public class Arena {
 
     }
 
-    public static boolean fightMonster(Hero hero, Combat c, int hp, String name, boolean[] algorithm, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
+    public static boolean fightMonster(Hero hero, Combat c, int hp, String name, boolean[] algorithm, FileOutputStream output, BufferedReader reader) throws IOException {
 
         Monster mon = new Monster(hp, name, algorithm);
 

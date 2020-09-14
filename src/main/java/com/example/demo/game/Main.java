@@ -255,8 +255,14 @@ public class Main {
 
     }
 
-    public static int hash(int range) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-1");
+    public static int hash(int range) {
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA-1");
+        } catch (NoSuchAlgorithmException e) {
+            return 0;
+        }
+
         File seed = new File("output.txt");
         byte[] hash = md.digest(String.valueOf(seed.length()).getBytes());
 

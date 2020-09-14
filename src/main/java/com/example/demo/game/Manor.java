@@ -3,11 +3,10 @@ package com.example.demo.game;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 public class Manor {
 
-    public static void atManor(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
+    public static void atManor(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
 
         if (!hero.getLostTo(2)) {
 

@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -25,7 +26,7 @@ public class Controller {
     }
 
     @PostMapping("/")
-    public String interact(@RequestBody String rawInput) throws IOException {
+    public String interact(@RequestBody String rawInput) throws IOException, NoSuchAlgorithmException {
         String input = decode(rawInput);
 
         InputStream stream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));

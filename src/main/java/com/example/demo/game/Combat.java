@@ -3,7 +3,6 @@ package com.example.demo.game;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 public class Combat {
 
@@ -28,7 +27,7 @@ public class Combat {
 
     }
 
-    public static boolean playerAttack(boolean monsterLoseTurn, byte i, Hero hero, Monster mon, FileOutputStream output) throws IOException, NoSuchAlgorithmException {
+    public static boolean playerAttack(boolean monsterLoseTurn, byte i, Hero hero, Monster mon, FileOutputStream output) throws IOException {
 
         boolean playerLoseTurn = false;
 
@@ -87,7 +86,7 @@ public class Combat {
 
     }
 
-    public static boolean determineDefend(byte consecutiveShield, Hero hero, FileOutputStream output) throws IOException, NoSuchAlgorithmException {
+    public static boolean determineDefend(byte consecutiveShield, Hero hero, FileOutputStream output) throws IOException {
 
         if (consecutiveShield < 12) {
 
@@ -109,7 +108,7 @@ public class Combat {
 
     }
 
-    public static boolean playerRun(Hero hero, Monster mon, byte i, FileOutputStream output) throws IOException, NoSuchAlgorithmException {
+    public static boolean playerRun(Hero hero, Monster mon, byte i, FileOutputStream output) throws IOException {
 
         boolean playerRuns = false;
 
@@ -130,7 +129,7 @@ public class Combat {
 
     }
 
-    public static void playerIdle(int i, Monster mon, Hero hero, FileOutputStream output) throws IOException, NoSuchAlgorithmException {
+    public static void playerIdle(int i, Monster mon, Hero hero, FileOutputStream output) throws IOException {
 
         if (mon.getAlgorithm()[i]) {
             output.write(("You lost a turn! Your opponent attacks!" + "\n").getBytes());
@@ -152,7 +151,7 @@ public class Combat {
 
     }
 
-    public void fight(Hero hero, Monster mon, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
+    public void fight(Hero hero, Monster mon, FileOutputStream output, BufferedReader reader) throws IOException {
 
         playerRuns = false;
         playerLoseTurn = false;
@@ -200,7 +199,7 @@ public class Combat {
 
     }
 
-    public void playerAct(int option, byte i, Hero hero, Monster mon, FileOutputStream output) throws IOException, NoSuchAlgorithmException {
+    public void playerAct(int option, byte i, Hero hero, Monster mon, FileOutputStream output) throws IOException {
 
         switch (option) {
 
