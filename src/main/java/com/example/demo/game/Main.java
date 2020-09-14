@@ -268,7 +268,7 @@ public class Main {
 
         int sum = 0;
         for (byte bits : hash) {
-            sum += bits;
+            sum += Math.abs(bits);
         }
         return sum % range;
     }
