@@ -198,27 +198,14 @@ public class Hero {
 
     public void setHeroStat(FileOutputStream output, BufferedReader reader) throws IOException {
 
-        String heroName = "";
+        output.write(("Choose your hero name: ").getBytes());
 
-        while ((heroName.equals("") || heroName.equals("No inputs yet!"))) {
-
-            output.write(("Choose your hero name: ").getBytes());
-
-            if (reader.ready()) {
-                heroName = reader.readLine();
-                output.write((heroName + "\n").getBytes());
-
-                if (heroName.equals("No inputs yet!")) {
-                    output.write(("Nice try." + "\n").getBytes());
-                }
-
-            } else {
-                throw new EOFException();
-            }
-
+        if (reader.ready()) {
+            name = reader.readLine();
+            output.write((name + "\n").getBytes());
+        } else {
+            throw new EOFException();
         }
-
-        name = heroName;
 
         String heroJob = "";
 

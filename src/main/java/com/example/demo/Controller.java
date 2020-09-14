@@ -28,13 +28,7 @@ public class Controller {
     public String interact(@RequestBody String rawInput) throws IOException {
         String input = decode(rawInput);
 
-        byte[] inputBytes = input.getBytes(StandardCharsets.UTF_8);
-
-        if (inputBytes.length > 9999) {
-            return "You linger in the world of games for too long and got kicked out.";
-        }
-
-        InputStream stream = new ByteArrayInputStream(inputBytes);
+        InputStream stream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
         File outputFile = Main.start(stream);
 
         return new String(Files.readAllBytes(outputFile.toPath()), StandardCharsets.UTF_8);
