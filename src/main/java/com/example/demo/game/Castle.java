@@ -3,11 +3,11 @@ package com.example.demo.game;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Random;
+import java.security.NoSuchAlgorithmException;
 
 public class Castle {
 
-    public static void atCastle(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static void atCastle(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
 
         printCastle(hero, output);
 
@@ -17,7 +17,7 @@ public class Castle {
 
             int option = Main.getInt(output, reader);
 
-            invalidInput = setCastle(option, hero, r, c, output, reader);
+            invalidInput = setCastle(option, hero, c, output, reader);
 
         }
 
@@ -42,7 +42,7 @@ public class Castle {
         output.write(("What to do? ").getBytes());
     }
 
-    public static boolean setCastle(int option, Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static boolean setCastle(int option, Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
 
         output.write(("\n").getBytes());
 
@@ -55,7 +55,7 @@ public class Castle {
                 break;
             case 2:
                 if (hero.getQuest() == 0) {
-                    guardTalk(hero, r, c, output, reader);
+                    guardTalk(hero, c, output, reader);
                 } else if (hero.getQuest() == 1 && hero.isInBag("Cloth")) {
                     guardCloth(hero, output);
                 } else if (hero.getQuest() == 2 && hero.isInBag("Letter")) {
@@ -85,7 +85,7 @@ public class Castle {
 
     }
 
-    public static void guardTalk(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static void guardTalk(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
 
         if (!hero.getLostTo(0)) {
 
@@ -101,7 +101,7 @@ public class Castle {
                 if (accept) {
 
                     output.write(("Nice! Now to make sure that you are capable of self-defense..." + "\n" + "\n").getBytes());
-                    guardFight(hero, r, c, output, reader);
+                    guardFight(hero, c, output, reader);
                     break;
 
                 } else {
@@ -121,7 +121,7 @@ public class Castle {
                             }
 
                             output.write(("Nice! Now to make sure that you are capable of self-defense..." + "\n" + "\n").getBytes());
-                            guardFight(hero, r, c, output, reader);
+                            guardFight(hero, c, output, reader);
                             break;
                     }
 
@@ -132,16 +132,16 @@ public class Castle {
         } else {
 
             output.write(("You've come again. Let's try this again!" + "\n").getBytes());
-            guardFight(hero, r, c, output, reader);
+            guardFight(hero, c, output, reader);
 
         }
     }
 
-    public static void guardFight(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static void guardFight(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
 
         Monster Guard = new Monster(200, "Guard", new boolean[]{true, false});
 
-        c.fight(hero, Guard, r, output, reader);
+        c.fight(hero, Guard, output, reader);
 
         boolean defeated = (Guard.getHp() <= 0);
 

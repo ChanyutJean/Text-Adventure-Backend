@@ -3,11 +3,11 @@ package com.example.demo.game;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Random;
+import java.security.NoSuchAlgorithmException;
 
 public class Arena {
 
-    public static void atArena(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static void atArena(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
 
         if (hero.isInBag("Master")) {
 
@@ -19,21 +19,21 @@ public class Arena {
 
                 case 0:
 
-                    breakLoop = fightMonster(hero, r, c, 500, "Goblin", new boolean[]{true, true, true, false}, output, reader);
+                    breakLoop = fightMonster(hero, c, 500, "Goblin", new boolean[]{true, true, true, false}, output, reader);
                     if (breakLoop) {
                         break;
                     }
 
                 case 1:
 
-                    breakLoop = fightMonster(hero, r, c, 200, "Fairy", new boolean[]{false, false, true, true}, output, reader);
+                    breakLoop = fightMonster(hero, c, 200, "Fairy", new boolean[]{false, false, true, true}, output, reader);
                     if (breakLoop) {
                         break;
                     }//this guy heals 3HP when he makes you defend
 
                 case 2:
 
-                    breakLoop = fightMonster(hero, r, c, 800, "Demon", new boolean[]{false, false, true, true, false, false, true, false, true, false}, output, reader);
+                    breakLoop = fightMonster(hero, c, 800, "Demon", new boolean[]{false, false, true, true, false, false, true, false, true, false}, output, reader);
                     if (breakLoop) {
                         break;
                     }//if hp<200 then flip algorithm
@@ -55,11 +55,11 @@ public class Arena {
 
     }
 
-    public static boolean fightMonster(Hero hero, Random r, Combat c, int hp, String name, boolean[] algorithm, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static boolean fightMonster(Hero hero, Combat c, int hp, String name, boolean[] algorithm, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
 
         Monster mon = new Monster(hp, name, algorithm);
 
-        c.fight(hero, mon, r, output, reader);
+        c.fight(hero, mon, output, reader);
 
         boolean defeated = (mon.getHp() <= 0);
         boolean breakLoop = false;

@@ -3,11 +3,11 @@ package com.example.demo.game;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Random;
+import java.security.NoSuchAlgorithmException;
 
 public class Temple {
 
-    public static void atTemple(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static void atTemple(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
 
         printTemple(hero, output);
 
@@ -17,7 +17,7 @@ public class Temple {
 
             int option = Main.getInt(output, reader);
 
-            invalidInput = setTemple(option, hero, r, c, output, reader);
+            invalidInput = setTemple(option, hero, c, output, reader);
 
         }
 
@@ -37,7 +37,7 @@ public class Temple {
 
     }
 
-    public static boolean setTemple(int option, Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static boolean setTemple(int option, Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
 
         boolean invalidInput = false;
 
@@ -56,7 +56,7 @@ public class Temple {
                 if (hero.getQuest() == 1 && !hero.isInBag("Cloth")) {
                     if (!hero.isInBag("Repel")) {
 
-                        boolean defeated = priestFight(hero, r, c, output, reader);
+                        boolean defeated = priestFight(hero, c, output, reader);
 
                         if (defeated) {
                             output.write(("Hmm! I guess you can go in the grave with this power of yours. Here, take this ghost repellent." + "\n").getBytes());
@@ -87,7 +87,7 @@ public class Temple {
 
     }
 
-    public static boolean priestFight(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static boolean priestFight(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
 
         if (!hero.getLostTo(1)) {
             output.write(("\n" + "Wait! You shouldn't go there, it's dangerous!" + "\n").getBytes());
@@ -99,7 +99,7 @@ public class Temple {
 
         Monster Priest = new Monster(300, "Priest", new boolean[]{true, true, false});
 
-        c.fight(hero, Priest, r, output, reader);
+        c.fight(hero, Priest, output, reader);
 
         return (Priest.getHp() <= 0);
 

@@ -2,11 +2,12 @@ package com.example.demo.game;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Random;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class Main {
 
-    public static File start(InputStream stream) throws IOException {
+    public static File start(InputStream stream) throws IOException, NoSuchAlgorithmException {
 
         if (stream == null) {
             return null;
@@ -19,19 +20,17 @@ public class Main {
 
         Hero hero = new Hero();
 
-        Random r = new Random();
-
         Combat c = new Combat();
 
-        boolean shoppingReady = introduction(hero, r, output, reader);
+        boolean shoppingReady = introduction(hero, output, reader);
 
         boolean fightReady = shopping(hero, output, reader, shoppingReady);
 
-        boolean ready = firstFight(hero, r, c, output, reader, fightReady);
+        boolean ready = firstFight(hero, c, output, reader, fightReady);
 
         try {
             while (hero.getGameIsRunning()) {
-                runGame(hero, r, c, output, reader, ready);
+                runGame(hero, c, output, reader, ready);
             }
         } catch (EOFException e) {
             return outputFile;
@@ -64,7 +63,7 @@ public class Main {
     //tycoon 500HP defend-defend-attack
 
 
-    public static void runGame(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader, boolean ready) throws IOException {
+    public static void runGame(Hero hero, Combat c, FileOutputStream output, BufferedReader reader, boolean ready) throws IOException, NoSuchAlgorithmException {
 
         if (!ready) {
             throw new EOFException();
@@ -76,24 +75,24 @@ public class Main {
                 Town.atTown(hero, output, reader);
                 break;
             case "Temple":
-                Temple.atTemple(hero, r, c, output, reader);
+                Temple.atTemple(hero, c, output, reader);
                 break;
             case "Grave":
                 Grave.atGrave(hero, output, reader);
                 hero.setLocation("Temple");
                 break;
             case "Castle":
-                Castle.atCastle(hero, r, c, output, reader);
+                Castle.atCastle(hero, c, output, reader);
                 break;
             case "Tavern":
                 Tavern.atTavern(hero, output, reader);
                 break;
             case "Manor":
-                Manor.atManor(hero, r, c, output, reader);
+                Manor.atManor(hero, c, output, reader);
                 hero.setLocation("Town");
                 break;
             case "Arena":
-                Arena.atArena(hero, r, c, output, reader);
+                Arena.atArena(hero, c, output, reader);
                 hero.setLocation("Town");
                 break;
             case "Shop":
@@ -105,7 +104,7 @@ public class Main {
     }
 
 
-    public static boolean introduction(Hero hero, Random r, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static boolean introduction(Hero hero, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
 
         if (!reader.ready()) {
             return false;
@@ -121,7 +120,7 @@ public class Main {
 
         do {
 
-            hero.assignStat(r);
+            hero.assignStat();
 
             hero.showStat(output);
 
@@ -172,7 +171,7 @@ public class Main {
 
     }
 
-    public static boolean firstFight(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader, boolean ready) throws IOException {
+    public static boolean firstFight(Hero hero, Combat c, FileOutputStream output, BufferedReader reader, boolean ready) throws IOException, NoSuchAlgorithmException {
 
         if (!ready) {
             return false;
@@ -187,7 +186,7 @@ public class Main {
         while (!madManDefeated) {
 
             try {
-                c.fight(hero, Madman, r, output, reader);
+                c.fight(hero, Madman, output, reader);
             } catch (EOFException e) {
                 return false;
             }
@@ -254,6 +253,18 @@ public class Main {
 
         return accept.equals("Yes");
 
+    }
+
+    public static int hash(int range) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-1");
+        File seed = new File("output.txt");
+        byte[] hash = md.digest(String.valueOf(seed.length()).getBytes());
+
+        int sum = 0;
+        for (byte bits : hash) {
+            sum += bits;
+        }
+        return sum % range;
     }
 
 }

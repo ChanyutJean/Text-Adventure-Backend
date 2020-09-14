@@ -3,11 +3,11 @@ package com.example.demo.game;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Random;
+import java.security.NoSuchAlgorithmException;
 
 public class Manor {
 
-    public static void atManor(Hero hero, Random r, Combat c, FileOutputStream output, BufferedReader reader) throws IOException {
+    public static void atManor(Hero hero, Combat c, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
 
         if (!hero.getLostTo(2)) {
 
@@ -45,7 +45,7 @@ public class Manor {
 
         Monster Tycoon = new Monster(500, "Tycoon", new boolean[]{false, false, true});
 
-        c.fight(hero, Tycoon, r, output, reader);
+        c.fight(hero, Tycoon, output, reader);
 
         boolean defeated = (Tycoon.getHp() <= 0);
 

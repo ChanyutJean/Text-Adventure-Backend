@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Random;
+import java.security.NoSuchAlgorithmException;
 
 public class Hero {
 
@@ -226,12 +226,12 @@ public class Hero {
         job = heroJob;
     }
 
-    public void assignStat(Random r) {
+    public void assignStat() throws NoSuchAlgorithmException {
 
-        str = (r.nextInt(Hero.MAX_SKILL - Hero.MIN_SKILL + 1) + Hero.MIN_SKILL);
-        dex = (r.nextInt(Hero.MAX_SKILL - Hero.MIN_SKILL + 1) + Hero.MIN_SKILL);
-        con = (r.nextInt(Hero.MAX_SKILL - Hero.MIN_SKILL + 1) + Hero.MIN_SKILL);
-        hp = (r.nextInt(Hero.MAX_HP - Hero.MIN_HP + 1) + Hero.MIN_HP);
+        str = (Main.hash(Hero.MAX_SKILL - Hero.MIN_SKILL + 1) + Hero.MIN_SKILL);
+        dex = (Main.hash(Hero.MAX_SKILL - Hero.MIN_SKILL + 1) + Hero.MIN_SKILL);
+        con = (Main.hash(Hero.MAX_SKILL - Hero.MIN_SKILL + 1) + Hero.MIN_SKILL);
+        hp = (Main.hash(Hero.MAX_HP - Hero.MIN_HP + 1) + Hero.MIN_HP);
         maxHp = hp;
 
     }

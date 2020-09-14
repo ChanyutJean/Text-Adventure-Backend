@@ -3,7 +3,7 @@ package com.example.demo.game;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Random;
+import java.security.NoSuchAlgorithmException;
 
 public class Combat {
 
@@ -28,7 +28,7 @@ public class Combat {
 
     }
 
-    public static boolean playerAttack(boolean monsterLoseTurn, byte i, Hero hero, Monster mon, Random r, FileOutputStream output) throws IOException {
+    public static boolean playerAttack(boolean monsterLoseTurn, byte i, Hero hero, Monster mon, FileOutputStream output) throws IOException, NoSuchAlgorithmException {
 
         boolean playerLoseTurn = false;
 
@@ -44,8 +44,8 @@ public class Combat {
 
             if (monsterStance) {
                 output.write(("You attack! Your opponent attacks!" + "\n").getBytes());
-                hero.changeHp(-r.nextInt(11) + hero.getDex() - 20, output); //Decrease 5-20 HP
-                mon.changeHp(-r.nextInt(11) - hero.getStr() + 5, output); //Decrease 5-20 HP
+                hero.changeHp(-Main.hash(11) + hero.getDex() - 20, output); //Decrease 5-20 HP
+                mon.changeHp(-Main.hash(11) - hero.getStr() + 5, output); //Decrease 5-20 HP
             } else {
                 output.write(("You attack! Your opponent shields! You flinched!" + "\n").getBytes());
                 playerLoseTurn = true;
@@ -53,7 +53,7 @@ public class Combat {
 
         } else {
             output.write(("You attack while your opponent is flinched." + "\n").getBytes());
-            mon.changeHp(-r.nextInt(11) - hero.getStr() - 5, output); //Decrease 15-30 HP
+            mon.changeHp(-Main.hash(11) - hero.getStr() - 5, output); //Decrease 15-30 HP
         }
 
         return playerLoseTurn;
@@ -87,17 +87,17 @@ public class Combat {
 
     }
 
-    public static boolean determineDefend(byte consecutiveShield, Random r, Hero hero, FileOutputStream output) throws IOException {
+    public static boolean determineDefend(byte consecutiveShield, Hero hero, FileOutputStream output) throws IOException, NoSuchAlgorithmException {
 
         if (consecutiveShield < 12) {
 
-            if (!(consecutiveShield > 5 && r.nextInt(100) < 110 - (10 * consecutiveShield))) {
+            if (!(consecutiveShield > 5 && Main.hash(100) < 110 - (10 * consecutiveShield))) {
 
                 return true; //1st to 5th time 100% succeed, 6th time 50% succeed, 7th time 40% succeed, 8th time 30% succeed and so on.
 
             } else {
                 output.write(("You shielded too much consecutively, your opponent figures your shield out and pierces!" + "\n").getBytes());
-                hero.changeHp(-r.nextInt(11) + hero.getDex() - 30, output); //Decrease 15-30 HP
+                hero.changeHp(-Main.hash(11) + hero.getDex() - 30, output); //Decrease 15-30 HP
             }
 
         } else {
@@ -109,18 +109,18 @@ public class Combat {
 
     }
 
-    public static boolean playerRun(Random r, Hero hero, Monster mon, byte i, FileOutputStream output) throws IOException {
+    public static boolean playerRun(Hero hero, Monster mon, byte i, FileOutputStream output) throws IOException, NoSuchAlgorithmException {
 
         boolean playerRuns = false;
 
-        if (r.nextInt(100) > 49) {
+        if (Main.hash(100) > 49) {
             output.write(("You ran away." + "\n").getBytes());
             playerRuns = true;
         } else {
             output.write(("Run attempt failed!" + "\n").getBytes());
             if (mon.getAlgorithm()[i]) {
                 output.write(("Your opponent attacks!" + "\n").getBytes());
-                hero.changeHp(-r.nextInt(11) + hero.getDex() - 20, output); //Decrease 5-20 HP
+                hero.changeHp(-Main.hash(11) + hero.getDex() - 20, output); //Decrease 5-20 HP
             } else {
                 output.write(("Your opponent shields!" + "\n").getBytes());
             }
@@ -130,11 +130,11 @@ public class Combat {
 
     }
 
-    public static void playerIdle(int i, Monster mon, Hero hero, Random r, FileOutputStream output) throws IOException {
+    public static void playerIdle(int i, Monster mon, Hero hero, FileOutputStream output) throws IOException, NoSuchAlgorithmException {
 
         if (mon.getAlgorithm()[i]) {
             output.write(("You lost a turn! Your opponent attacks!" + "\n").getBytes());
-            hero.changeHp(-r.nextInt(11) + hero.getDex() - 20, output); //Decrease 5-20 HP
+            hero.changeHp(-Main.hash(11) + hero.getDex() - 20, output); //Decrease 5-20 HP
 
         } else {
             output.write(("You lost a turn! Your opponent shields!" + "\n").getBytes());
@@ -152,7 +152,7 @@ public class Combat {
 
     }
 
-    public void fight(Hero hero, Monster mon, Random r, FileOutputStream output, BufferedReader reader) throws IOException {
+    public void fight(Hero hero, Monster mon, FileOutputStream output, BufferedReader reader) throws IOException, NoSuchAlgorithmException {
 
         playerRuns = false;
         playerLoseTurn = false;
@@ -171,11 +171,11 @@ public class Combat {
 
                     int option = Main.getInt(output, reader);
 
-                    playerAct(option, r, i, hero, mon, output);
+                    playerAct(option, i, hero, mon, output);
 
                 } else {
 
-                    playerIdle(i, mon, hero, r, output);
+                    playerIdle(i, mon, hero, output);
 
                     playerLoseTurn = false;
                 }
@@ -200,7 +200,7 @@ public class Combat {
 
     }
 
-    public void playerAct(int option, Random r, byte i, Hero hero, Monster mon, FileOutputStream output) throws IOException {
+    public void playerAct(int option, byte i, Hero hero, Monster mon, FileOutputStream output) throws IOException, NoSuchAlgorithmException {
 
         switch (option) {
 
@@ -208,7 +208,7 @@ public class Combat {
 
                 consecutiveShield = 0;
 
-                playerLoseTurn = playerAttack(monsterLoseTurn, i, hero, mon, r, output);
+                playerLoseTurn = playerAttack(monsterLoseTurn, i, hero, mon, output);
 
                 monsterLoseTurn = false;
 
@@ -225,7 +225,7 @@ public class Combat {
 
                 consecutiveShield++;
 
-                boolean playerDefends = determineDefend(consecutiveShield, r, hero, output);
+                boolean playerDefends = determineDefend(consecutiveShield, hero, output);
 
                 if (playerDefends) {
 
@@ -238,7 +238,7 @@ public class Combat {
 
             case 0:
 
-                playerRuns = playerRun(r, hero, mon, i, output);
+                playerRuns = playerRun(hero, mon, i, output);
 
                 break;
 
