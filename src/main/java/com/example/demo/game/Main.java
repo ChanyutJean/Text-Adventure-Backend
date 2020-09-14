@@ -258,7 +258,7 @@ public class Main {
     public static int hash(int range) {
         MessageDigest md;
         try {
-            md = MessageDigest.getInstance("SHA-1");
+            md = MessageDigest.getInstance("MD-5");
         } catch (NoSuchAlgorithmException e) {
             return 0;
         }
