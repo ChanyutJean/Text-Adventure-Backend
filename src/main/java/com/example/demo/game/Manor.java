@@ -1,6 +1,7 @@
 package com.example.demo.game;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -21,7 +22,7 @@ public class Manor {
                 password = line;
                 output.write((password + "\n").getBytes());
             } else {
-                return;
+                throw new EOFException();
             }
 
             if (password.equals("Hello")) {
