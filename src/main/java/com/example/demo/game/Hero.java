@@ -12,8 +12,6 @@ public class Hero {
     public static final int INITIAL_GOLD = 300;
     public static final int MIN_HP = 200;
     public static final int MAX_HP = 300;
-    public static final int MIN_SKILL = 10;
-    public static final int MAX_SKILL = 15;
 
     private int maxHp;
     private int hp;
@@ -228,9 +226,9 @@ public class Hero {
 
     public void assignStat() {
 
-        str = (Main.hash(Hero.MAX_SKILL - Hero.MIN_SKILL + 1) + Hero.MIN_SKILL);
-        dex = (Main.hash(Hero.MAX_SKILL - Hero.MIN_SKILL + 1) + Hero.MIN_SKILL);
-        con = (Main.hash(Hero.MAX_SKILL - Hero.MIN_SKILL + 1) + Hero.MIN_SKILL);
+        str = (Main.hash(5) + 10);
+        dex = (Main.hash(6) + 9);
+        con = (Main.hash(7) + 8);
         hp = (Main.hash(Hero.MAX_HP - Hero.MIN_HP + 1) + Hero.MIN_HP);
         maxHp = hp;
 
