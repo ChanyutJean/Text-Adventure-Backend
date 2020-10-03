@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 
 @RestController
-@CrossOrigin(origins = "https://text-adventure-frontend.herokuapp.com/")
+@CrossOrigin
 @RequestMapping("/")
 public class Controller {
 
